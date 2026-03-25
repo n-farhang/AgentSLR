@@ -1,0 +1,6 @@
+2026-03-23 00:06:12,423 - INFO - Evaluating model extraction for model: oss
+2026-03-23 00:06:12,423 - INFO - Pathogens: ['Ebola']
+2026-03-23 00:06:12,471 - INFO - Ebola: PERG=294, Extracted=239, Common=79
+2026-03-23 00:06:12,720 - INFO -   Flagging: P=1.000, R=1.000, F1=1.000
+2026-03-23 00:06:12,720 - INFO -   Count: P=0.500, R=1.000, F1=0.667
+2026-03-23 00:06:12,722 - INFO - Results saved to: data/agentslr/evals/data_extraction/models/model_extraction_oss_detailed.csv

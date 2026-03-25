@@ -1,0 +1,4 @@
+2026-03-23 00:05:29,975 - INFO - Evaluating abstract screening for model: oss
+2026-03-23 00:05:29,975 - INFO - Pathogens: ['Ebola']
+2026-03-23 00:06:00,294 - INFO - Ebola: P=0.7430, R=0.7499, F1=0.7464, N=4134
+2026-03-23 00:06:00,645 - INFO - Results saved to: data/agentslr/evals/article_screening/abstract_screening_oss.csv

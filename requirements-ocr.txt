@@ -1,0 +1,18 @@
+# OCR stage dependencies.
+# If you want a clean standalone OCR environment, install a CUDA-matched torch
+# build first. For Paddle, also install one Paddle runtime
+# (`paddlepaddle` or `paddlepaddle-gpu`) before these packages.
+
+pandas
+numpy
+tqdm
+requests
+mistralai
+torch
+httpx
+pypdfium2
+rapidfuzz
+Pillow
+git+https://github.com/huggingface/transformers.git
+paddleocr
+paddlex[ocr]==3.4.2

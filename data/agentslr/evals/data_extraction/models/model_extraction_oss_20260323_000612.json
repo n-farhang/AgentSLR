@@ -1,0 +1,57 @@
+{
+  "results": [
+    {
+      "pathogen": "Ebola",
+      "stats": {
+        "pathogen": "Ebola",
+        "perg_total": 294,
+        "perg_invalid": "46",
+        "extracted_total": 239,
+        "extracted_invalid": "0",
+        "common_articles": 79
+      },
+      "flagging": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "count": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6666666666666666
+      },
+      "extraction": {
+        "model_type": {
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1": 0.8888888888888888
+        },
+        "stoch_deter": {
+          "precision": 0.7532467532467533,
+          "recall": 0.8529411764705882,
+          "f1": 0.7999999999999999
+        },
+        "theoretical_model": {
+          "precision": 0.8765432098765432,
+          "recall": 0.8765432098765432,
+          "f1": 0.8765432098765432
+        },
+        "assumptions": {
+          "precision": 0.27044025157232704,
+          "recall": 0.46236559139784944,
+          "f1": 0.3412698412698413
+        },
+        "interventions_type": {
+          "precision": 0.4782608695652174,
+          "recall": 0.6875,
+          "f1": 0.5641025641025642
+        },
+        "transmission_route": {
+          "precision": 0.12631578947368421,
+          "recall": 0.15,
+          "f1": 0.13714285714285718
+        }
+      }
+    }
+  ]
+}

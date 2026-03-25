@@ -1,0 +1,216 @@
+pathogen,field,precision,recall,f1,model
+Ebola,screening,0.5,1.0,0.667,oss
+Ebola,model_count,0.5,1.0,0.667,oss
+Ebola,model_type,0.889,0.889,0.889,oss
+Ebola,stoch_deter,0.753,0.853,0.8,oss
+Ebola,transmission_route,0.126,0.15,0.137,oss
+Ebola,theoretical_model,0.877,0.877,0.877,oss
+Ebola,code_available,0.85,0.84,0.845,oss
+Ebola,assumptions,0.27,0.462,0.341,oss
+Ebola,interventions_type,0.478,0.688,0.564,oss
+Ebola,Article Flagging,0.915,0.917,0.915,oss
+Lassa,screening,0.6,1.0,0.75,oss
+Lassa,model_count,0.6,1.0,0.75,oss
+Lassa,model_type,0.889,0.889,0.889,oss
+Lassa,compartmental_type,0.0,0.0,0.0,oss
+Lassa,stoch_deter,1.0,1.0,1.0,oss
+Lassa,transmission_route,1.0,0.944,0.971,oss
+Lassa,theoretical_model,0.778,0.778,0.778,oss
+Lassa,code_available,1.0,0.889,0.941,oss
+Lassa,assumptions,0.294,0.455,0.357,oss
+Lassa,interventions_type,0.538,0.636,0.583,oss
+Lassa,Article Flagging,0.955,0.987,0.97,oss
+SARS,screening,0.486,0.971,0.648,oss
+SARS,model_count,0.486,0.971,0.648,oss
+SARS,model_type,0.765,0.765,0.765,oss
+SARS,compartmental_type,0.8,0.8,0.8,oss
+SARS,stoch_deter,0.758,0.781,0.769,oss
+SARS,transmission_route,0.262,0.324,0.289,oss
+SARS,theoretical_model,0.618,0.618,0.618,oss
+SARS,code_available,1.0,1.0,1.0,oss
+SARS,assumptions,0.215,0.389,0.277,oss
+SARS,interventions_type,0.464,0.788,0.584,oss
+SARS,Article Flagging,0.861,0.861,0.861,oss
+Zika,screening,0.483,0.977,0.646,oss
+Zika,model_count,0.483,0.977,0.646,oss
+Zika,model_type,0.881,0.881,0.881,oss
+Zika,compartmental_type,0.828,0.828,0.828,oss
+Zika,stoch_deter,0.825,0.786,0.805,oss
+Zika,transmission_route,0.679,0.745,0.71,oss
+Zika,theoretical_model,0.81,0.81,0.81,oss
+Zika,code_available,0.821,0.762,0.79,oss
+Zika,assumptions,0.308,0.522,0.387,oss
+Zika,interventions_type,0.316,0.692,0.434,oss
+Zika,Article Flagging,0.868,0.892,0.876,oss
+Ebola,screening,0.805,0.986,0.886,deepseek
+Ebola,model_count,0.805,0.986,0.886,deepseek
+Ebola,model_type,0.757,0.757,0.757,deepseek
+Ebola,stoch_deter,0.786,0.948,0.859,deepseek
+Ebola,transmission_route,0.113,0.132,0.122,deepseek
+Ebola,theoretical_model,0.743,0.743,0.743,deepseek
+Ebola,code_available,0.814,0.814,0.814,deepseek
+Ebola,assumptions,0.235,0.395,0.295,deepseek
+Ebola,interventions_type,0.337,0.447,0.384,deepseek
+Ebola,Article Flagging,0.866,0.864,0.864,deepseek
+Lassa,screening,1.0,1.0,1.0,deepseek
+Lassa,model_count,1.0,1.0,1.0,deepseek
+Lassa,model_type,0.833,0.833,0.833,deepseek
+Lassa,compartmental_type,1.0,1.0,1.0,deepseek
+Lassa,stoch_deter,1.0,1.0,1.0,deepseek
+Lassa,transmission_route,0.917,0.846,0.88,deepseek
+Lassa,theoretical_model,0.5,0.5,0.5,deepseek
+Lassa,code_available,0.833,0.833,0.833,deepseek
+Lassa,assumptions,0.364,0.5,0.421,deepseek
+Lassa,interventions_type,0.667,0.5,0.571,deepseek
+Lassa,Article Flagging,0.964,0.85,0.893,deepseek
+SARS,screening,0.7,1.0,0.824,deepseek
+SARS,model_count,0.7,1.0,0.824,deepseek
+SARS,model_type,0.607,0.607,0.607,deepseek
+SARS,compartmental_type,0.533,0.533,0.533,deepseek
+SARS,stoch_deter,0.75,0.84,0.792,deepseek
+SARS,transmission_route,0.286,0.357,0.317,deepseek
+SARS,theoretical_model,0.607,0.607,0.607,deepseek
+SARS,code_available,0.964,0.964,0.964,deepseek
+SARS,assumptions,0.229,0.423,0.297,deepseek
+SARS,interventions_type,0.293,0.429,0.348,deepseek
+SARS,Article Flagging,0.834,0.81,0.816,deepseek
+Zika,screening,0.973,0.973,0.973,deepseek
+Zika,model_count,0.973,0.973,0.973,deepseek
+Zika,model_type,0.778,0.778,0.778,deepseek
+Zika,compartmental_type,0.52,0.52,0.52,deepseek
+Zika,stoch_deter,0.778,0.778,0.778,deepseek
+Zika,transmission_route,0.567,0.739,0.642,deepseek
+Zika,theoretical_model,0.472,0.472,0.472,deepseek
+Zika,code_available,0.889,0.889,0.889,deepseek
+Zika,assumptions,0.145,0.303,0.196,deepseek
+Zika,interventions_type,0.22,0.333,0.265,deepseek
+Zika,Article Flagging,0.903,0.894,0.898,deepseek
+Ebola,screening,0.632,0.988,0.771,kimi
+Ebola,model_count,0.632,0.988,0.771,kimi
+Ebola,model_type,0.848,0.848,0.848,kimi
+Ebola,stoch_deter,0.84,0.913,0.875,kimi
+Ebola,transmission_route,0.075,0.089,0.081,kimi
+Ebola,theoretical_model,0.886,0.886,0.886,kimi
+Ebola,code_available,0.855,0.823,0.839,kimi
+Ebola,assumptions,0.248,0.446,0.319,kimi
+Ebola,interventions_type,0.388,0.688,0.496,kimi
+Ebola,Article Flagging,0.928,0.929,0.928,kimi
+Lassa,screening,0.75,1.0,0.857,kimi
+Lassa,model_count,0.75,1.0,0.857,kimi
+Lassa,model_type,0.778,0.778,0.778,kimi
+Lassa,compartmental_type,0.0,0.0,0.0,kimi
+Lassa,stoch_deter,1.0,1.0,1.0,kimi
+Lassa,transmission_route,0.8,0.889,0.842,kimi
+Lassa,theoretical_model,0.889,0.889,0.889,kimi
+Lassa,code_available,1.0,1.0,1.0,kimi
+Lassa,assumptions,0.368,0.636,0.467,kimi
+Lassa,interventions_type,0.692,0.818,0.75,kimi
+Lassa,Article Flagging,0.955,0.987,0.97,kimi
+SARS,screening,0.673,1.0,0.805,kimi
+SARS,model_count,0.673,1.0,0.805,kimi
+SARS,model_type,0.8,0.8,0.8,kimi
+SARS,compartmental_type,0.857,0.857,0.857,kimi
+SARS,stoch_deter,0.857,0.727,0.787,kimi
+SARS,transmission_route,0.246,0.412,0.308,kimi
+SARS,theoretical_model,0.714,0.714,0.714,kimi
+SARS,code_available,0.971,0.943,0.957,kimi
+SARS,assumptions,0.264,0.543,0.355,kimi
+SARS,interventions_type,0.263,0.656,0.375,kimi
+SARS,Article Flagging,0.87,0.872,0.871,kimi
+Zika,screening,0.717,0.974,0.826,kimi
+Zika,model_count,0.717,0.974,0.826,kimi
+Zika,model_type,0.895,0.895,0.895,kimi
+Zika,compartmental_type,0.76,0.76,0.76,kimi
+Zika,stoch_deter,0.818,0.711,0.761,kimi
+Zika,transmission_route,0.615,0.681,0.646,kimi
+Zika,theoretical_model,0.737,0.737,0.737,kimi
+Zika,code_available,0.868,0.868,0.868,kimi
+Zika,assumptions,0.268,0.629,0.376,kimi
+Zika,interventions_type,0.365,0.679,0.475,kimi
+Zika,Article Flagging,0.901,0.92,0.909,kimi
+Ebola,screening,0.876,0.987,0.929,glm
+Ebola,model_count,0.876,0.987,0.929,glm
+Ebola,model_type,0.885,0.885,0.885,glm
+Ebola,stoch_deter,0.8,0.896,0.845,glm
+Ebola,transmission_route,0.053,0.065,0.058,glm
+Ebola,theoretical_model,0.859,0.859,0.859,glm
+Ebola,code_available,0.849,0.795,0.821,glm
+Ebola,assumptions,0.22,0.429,0.291,glm
+Ebola,interventions_type,0.433,0.755,0.55,glm
+Ebola,Article Flagging,0.947,0.945,0.946,glm
+Lassa,screening,1.0,1.0,1.0,glm
+Lassa,model_count,1.0,1.0,1.0,glm
+Lassa,model_type,0.667,0.667,0.667,glm
+Lassa,compartmental_type,0.0,0.0,0.0,glm
+Lassa,stoch_deter,1.0,0.889,0.941,glm
+Lassa,transmission_route,1.0,0.944,0.971,glm
+Lassa,theoretical_model,1.0,1.0,1.0,glm
+Lassa,code_available,0.875,0.778,0.824,glm
+Lassa,assumptions,0.348,0.727,0.471,glm
+Lassa,interventions_type,0.667,0.909,0.769,glm
+Lassa,Article Flagging,1.0,1.0,1.0,glm
+SARS,screening,0.756,1.0,0.861,glm
+SARS,model_count,0.756,1.0,0.861,glm
+SARS,model_type,0.806,0.806,0.806,glm
+SARS,compartmental_type,0.8,0.8,0.8,glm
+SARS,stoch_deter,0.839,0.897,0.867,glm
+SARS,transmission_route,0.175,0.233,0.2,glm
+SARS,theoretical_model,0.516,0.516,0.516,glm
+SARS,code_available,0.966,0.903,0.933,glm
+SARS,assumptions,0.188,0.406,0.257,glm
+SARS,interventions_type,0.283,0.548,0.374,glm
+SARS,Article Flagging,0.846,0.836,0.839,glm
+Zika,screening,0.881,0.974,0.925,glm
+Zika,model_count,0.881,0.974,0.925,glm
+Zika,model_type,0.919,0.919,0.919,glm
+Zika,compartmental_type,0.731,0.731,0.731,glm
+Zika,stoch_deter,0.818,0.73,0.771,glm
+Zika,transmission_route,0.654,0.739,0.694,glm
+Zika,theoretical_model,0.865,0.865,0.865,glm
+Zika,code_available,0.824,0.757,0.789,glm
+Zika,assumptions,0.236,0.583,0.336,glm
+Zika,interventions_type,0.271,0.5,0.351,glm
+Zika,Article Flagging,0.928,0.928,0.928,glm
+Ebola,screening,0.556,1.0,0.715,gpt
+Ebola,model_count,0.556,1.0,0.715,gpt
+Ebola,model_type,0.911,0.911,0.911,gpt
+Ebola,stoch_deter,0.841,0.746,0.791,gpt
+Ebola,transmission_route,0.261,0.291,0.275,gpt
+Ebola,theoretical_model,0.924,0.924,0.924,gpt
+Ebola,code_available,0.861,0.861,0.861,gpt
+Ebola,assumptions,0.2,0.511,0.287,gpt
+Ebola,interventions_type,0.416,0.674,0.514,gpt
+Ebola,Article Flagging,0.893,0.895,0.892,gpt
+Lassa,screening,0.6,1.0,0.75,gpt
+Lassa,model_count,0.6,1.0,0.75,gpt
+Lassa,model_type,0.778,0.778,0.778,gpt
+Lassa,compartmental_type,0.0,0.0,0.0,gpt
+Lassa,stoch_deter,1.0,0.889,0.941,gpt
+Lassa,transmission_route,0.778,0.778,0.778,gpt
+Lassa,theoretical_model,0.889,0.889,0.889,gpt
+Lassa,code_available,1.0,1.0,1.0,gpt
+Lassa,assumptions,0.455,0.909,0.606,gpt
+Lassa,interventions_type,0.6,0.818,0.692,gpt
+Lassa,Article Flagging,0.955,0.987,0.97,gpt
+SARS,screening,0.493,1.0,0.66,gpt
+SARS,model_count,0.493,1.0,0.66,gpt
+SARS,model_type,0.765,0.765,0.765,gpt
+SARS,compartmental_type,0.857,0.857,0.857,gpt
+SARS,stoch_deter,0.917,0.667,0.772,gpt
+SARS,transmission_route,0.333,0.471,0.39,gpt
+SARS,theoretical_model,0.647,0.647,0.647,gpt
+SARS,code_available,0.971,0.971,0.971,gpt
+SARS,assumptions,0.143,0.371,0.206,gpt
+SARS,interventions_type,0.325,0.781,0.459,gpt
+SARS,Article Flagging,0.861,0.861,0.861,gpt
+Zika,screening,0.609,1.0,0.757,gpt
+Zika,model_count,0.609,1.0,0.757,gpt
+Zika,model_type,0.872,0.872,0.872,gpt
+Zika,compartmental_type,0.769,0.769,0.769,gpt
+Zika,stoch_deter,0.81,0.436,0.567,gpt
+Zika,transmission_route,0.7,0.729,0.714,gpt
+Zika,theoretical_model,0.795,0.795,0.795,gpt
+Zika,code_available,0.897,0.897,0.897,gpt
+Zika,assumptions,0.262,0.75,0.388,gpt
+Zika,interventions_type,0.311,0.731,0.437,gpt
+Zika,Article Flagging,0.886,0.911,0.896,gpt

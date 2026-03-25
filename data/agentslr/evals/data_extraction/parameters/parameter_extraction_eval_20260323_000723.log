@@ -1,0 +1,5 @@
+2026-03-23 00:07:23,344 - INFO - Evaluating parameter extraction for model: oss
+2026-03-23 00:07:23,344 - INFO - Pathogens: ['Ebola']
+2026-03-23 00:07:23,368 - INFO - Ebola: PERG=1223, Extracted=75, Common=0
+2026-03-23 00:07:23,369 - ERROR - Error processing Ebola: Found empty input array (e.g., `y_true` or `y_pred`) while a minimum of 1 sample is required.
+2026-03-23 00:07:23,372 - INFO - Results saved to: data/agentslr/evals/data_extraction/parameters/parameter_extraction_oss_detailed.csv

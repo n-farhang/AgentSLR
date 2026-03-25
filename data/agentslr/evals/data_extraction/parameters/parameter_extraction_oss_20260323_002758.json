@@ -1,0 +1,178 @@
+{
+  "results": [
+    {
+      "pathogen": "Ebola",
+      "stats": {
+        "pathogen": "Ebola",
+        "perg_total": 1223,
+        "extracted_total": 311,
+        "common_articles": 116,
+        "perg_filtered": 496,
+        "extracted_filtered": 296
+      },
+      "flagging": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "count": {
+        "precision": 0.8074324324324325,
+        "recall": 0.48185483870967744,
+        "f1": 0.6035353535353535
+      },
+      "class_flagging": {
+        "attack_rate": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "growth_rate": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "human_delay": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "mutation_rate": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "relative_contribution": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "reproduction_number": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "seroprevalence": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        },
+        "severity": {
+          "precision": 0.0,
+          "recall": NaN,
+          "f1": NaN
+        }
+      },
+      "class_counts": {
+        "attack_rate": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "growth_rate": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "human_delay": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "mutation_rate": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "relative_contribution": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "reproduction_number": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "seroprevalence": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "severity": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "extraction": {
+        "parameter_class": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "parameter_type": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "value": {
+          "precision": 0.22535211267605634,
+          "recall": 0.32,
+          "f1": 0.2644628099173554
+        },
+        "unit": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "value_type": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "single_type_uncertainty": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "paired_uncertainty": {
+          "precision": 0.021164021164021163,
+          "recall": 0.0547945205479452,
+          "f1": 0.030534351145038167
+        },
+        "population_sex": {
+          "precision": 0.7850467289719626,
+          "recall": 0.7813953488372093,
+          "f1": 0.7832167832167831
+        },
+        "population_group": {
+          "precision": 0.205607476635514,
+          "recall": 0.22110552763819097,
+          "f1": 0.21307506053268765
+        },
+        "population_sample_type": {
+          "precision": 0.4158878504672897,
+          "recall": 0.4472361809045226,
+          "f1": 0.43099273607748184
+        }
+      },
+      "grouped": {
+        "value": {
+          "precision": 0.11267605633802817,
+          "recall": 0.16,
+          "f1": 0.1322314049586777
+        },
+        "uncertainty": {
+          "precision": 0.007054673721340388,
+          "recall": 0.0182648401826484,
+          "f1": 0.010178117048346055
+        },
+        "population": {
+          "precision": 0.4688473520249221,
+          "recall": 0.4832456857933076,
+          "f1": 0.47576152660898424
+        }
+      }
+    }
+  ]
+}

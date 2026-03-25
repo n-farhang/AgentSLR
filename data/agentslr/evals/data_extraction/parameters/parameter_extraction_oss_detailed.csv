@@ -1,0 +1,24 @@
+pathogen,field,precision,recall,f1,model
+Ebola,Article Flagging,1.0,1.0,1.0,oss
+Ebola,Parameter Counts,0.8074324324324325,0.48185483870967744,0.6035353535353535,oss
+Ebola,flagging_attack_rate,0.0,,,oss
+Ebola,flagging_growth_rate,0.0,,,oss
+Ebola,flagging_human_delay,0.0,,,oss
+Ebola,flagging_mutation_rate,0.0,,,oss
+Ebola,flagging_relative_contribution,0.0,,,oss
+Ebola,flagging_reproduction_number,0.0,,,oss
+Ebola,flagging_seroprevalence,0.0,,,oss
+Ebola,flagging_severity,0.0,,,oss
+Ebola,parameter_class,0.0,0.0,0.0,oss
+Ebola,parameter_type,0.0,0.0,0.0,oss
+Ebola,value,0.22535211267605634,0.32,0.2644628099173554,oss
+Ebola,unit,0.0,0.0,0.0,oss
+Ebola,value_type,0.0,0.0,0.0,oss
+Ebola,single_type_uncertainty,0.0,0.0,0.0,oss
+Ebola,paired_uncertainty,0.021164021164021163,0.0547945205479452,0.030534351145038167,oss
+Ebola,population_sex,0.7850467289719626,0.7813953488372093,0.7832167832167831,oss
+Ebola,population_group,0.205607476635514,0.22110552763819097,0.21307506053268765,oss
+Ebola,population_sample_type,0.4158878504672897,0.4472361809045226,0.43099273607748184,oss
+Ebola,grouped_value,0.11267605633802817,0.16,0.1322314049586777,oss
+Ebola,grouped_uncertainty,0.007054673721340388,0.0182648401826484,0.010178117048346055,oss
+Ebola,grouped_population,0.4688473520249221,0.4832456857933076,0.47576152660898424,oss

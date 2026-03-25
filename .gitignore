@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+data/human_validation
+.DS_Store
