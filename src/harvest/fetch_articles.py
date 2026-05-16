@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import errno
 import os
+import time
 import re
 import shutil
 import tempfile
 import threading
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
+from concurrent.futures import TimeoutError as FuturesTimeoutError
+import concurrent.futures as _cf
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -122,6 +125,7 @@ class PDFDownloader:
         openalex_mailto: str | None = None,
         openalex_api_key: str | None = None,
         temp_dir: str | None = None,
+        logger: Any = None,
     ):
         self.unpaywall_email = unpaywall_email
         self.ncbi_tool = ncbi_tool
@@ -143,6 +147,7 @@ class PDFDownloader:
             "direct": ThreadSafeRateLimiter(20.0),
             "idconv": ThreadSafeRateLimiter(10.0),
         }
+        self.logger = logger
 
     def _session(self) -> requests.Session:
         session = getattr(self._thread_local, "session", None)
@@ -163,12 +168,16 @@ class PDFDownloader:
         except Exception:
             return False
 
-    def _download_to_temp(self, url: str, limiter_key: str) -> tuple[str | None, str]:
+    def _download_to_temp(self, url: str, limiter_key: str, max_seconds: int = 120) -> tuple[str | None, str]:
+        # log for
+        
         if limiter_key == "direct" and not self._is_server_responsive(url):
             return None, "Server unreachable (quick check)"
 
         session = self._session()
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Waiting on limiter: {limiter_key}")
         self.limiters[limiter_key].wait()
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Limiter released: {limiter_key}")
         headers = {"Accept": "application/pdf,*/*;q=0.9"}
 
         try:
@@ -195,11 +204,17 @@ class PDFDownloader:
                 )
                 temp_path = temp_file.name
                 size = 0
+                deadline = time.monotonic() + max_seconds 
 
                 try:
                     for chunk in response.iter_content(chunk_size=1024 * 64):
                         if not chunk:
                             continue
+                        if time.monotonic() > deadline:          # <-- ADD THIS
+                            temp_file.close()
+                            os.remove(temp_path)
+                            return None, f"Download exceeded {max_seconds}s wall-clock limit"
+
                         size += len(chunk)
                         if size > MAX_PDF_SIZE:
                             temp_file.close()
@@ -222,13 +237,33 @@ class PDFDownloader:
                     try:
                         os.remove(temp_path)
                     except Exception:
+                        emit_log(
+                            self.logger ,
+                            "info",
+                            f"[{utc_now_iso()}] Stream error: {exc}",
+                        )
                         pass
                     return None, f"Stream error: {exc}"
         except requests.exceptions.Timeout:
+            emit_log(
+                        self.logger ,
+                        "info",
+                        f"[{utc_now_iso()}] Progress: Request timeout",
+                    )
             return None, "Request timeout"
         except requests.exceptions.ConnectionError:
+            emit_log(
+                        self.logger ,
+                        "info",
+                        f"[{utc_now_iso()}] Progress: Connection error",
+                    )
             return None, "Connection error"
         except Exception as exc:
+            emit_log(
+                        self.logger ,
+                        "info",
+                        f"[{utc_now_iso()}] Download error: {exc}",
+                    )
             return None, f"Download error: {exc}"
 
     def _pmc_idconv(self, identifier: str, idtype: str | None = None) -> dict[str, str | None]:
@@ -308,7 +343,9 @@ class PDFDownloader:
         if self.openalex_api_key:
             params["api_key"] = self.openalex_api_key
 
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Waiting on limiter: openalex")
         self.limiters["openalex"].wait()
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Limiter released: openalex")
         response = self._session().get(
             f"https://api.openalex.org/works/https://doi.org/{quote(normalized_doi, safe='')}",
             params=params,
@@ -369,8 +406,10 @@ class PDFDownloader:
         query = " OR ".join(f"({part})" for part in query_parts) if len(query_parts) > 1 else (query_parts[0] if query_parts else "")
         if not query:
             return None, "No query"
-
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Waiting on limiter: europe_pmc ")
         self.limiters["europe_pmc"].wait()
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Limiter released: europe_pmc ")
+
         response = self._session().get(
             "https://www.ebi.ac.uk/europepmc/webservices/rest/search",
             params={
@@ -452,8 +491,9 @@ class PDFDownloader:
                     return temp_path, ""
                 os.remove(temp_path)
                 return None, f"Invalid PDF: {validation_error}"
-
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Waiting on limiter: unpaywall")
         self.limiters["unpaywall"].wait()
+        emit_log(self.logger, "debug", f"[{utc_now_iso()}] Limiter released: unpaywall")
         response = self._session().get(
             f"https://api.unpaywall.org/v2/{quote(normalized_doi, safe='')}",
             params={"email": self.unpaywall_email},
@@ -515,7 +555,17 @@ class PDFDownloader:
             result.attempted_sources.append(source_name)
             temp_path = None
             try:
-                temp_path, error = fn(**kwargs)
+                _ex = _cf.ThreadPoolExecutor(max_workers=1)
+                _fut = _ex.submit(fn, **kwargs)
+                try:
+                    temp_path, error = _fut.result(timeout=45)
+                except _cf.TimeoutError:
+                    errors.append(f"{source_name}: Timed out after 90s")
+                    _ex.shutdown(wait=False)   # don't wait for the stuck thread
+                    continue
+                finally:
+                    _ex.shutdown(wait=False)   # same here on normal exit
+                
                 if temp_path:
                     result.success = True
                     result.source = source_name
@@ -523,12 +573,25 @@ class PDFDownloader:
                     return result
                 errors.append(f"{source_name}: {error}")
             except Exception as exc:
-                if temp_path and os.path.exists(temp_path):
-                    try:
-                        os.remove(temp_path)
-                    except Exception:
-                        pass
                 errors.append(f"{source_name}: Exception - {exc}")
+        # for source_name, fn, kwargs in sources:
+        #     result.attempted_sources.append(source_name)
+        #     temp_path = None
+        #     try:
+        #         temp_path, error = fn(**kwargs)
+        #         if temp_path:
+        #             result.success = True
+        #             result.source = source_name
+        #             result.filepath = temp_path
+        #             return result
+        #         errors.append(f"{source_name}: {error}")
+        #     except Exception as exc:
+        #         if temp_path and os.path.exists(temp_path):
+        #             try:
+        #                 os.remove(temp_path)
+        #             except Exception:
+        #                 pass
+        #         errors.append(f"{source_name}: Exception - {exc}")
 
         result.error = " | ".join(errors) if errors else "No sources attempted"
         return result
@@ -543,6 +606,11 @@ def process_record(
     current_success: int = 0,
 ) -> dict[str, Any]:
     output = dict(record)
+    emit_log(
+        downloader.logger, "debug",
+        f"[{utc_now_iso()}] Processing idx={idx} "
+        f"pmid={record.get('pmid')} doi={record.get('doi')}"
+    )
     output["download_attempted_at"] = utc_now_iso()
 
     if output.get("downloaded") is True and output.get("downloaded_path"):
@@ -632,6 +700,16 @@ def download_articles(
     temp_dir = os.path.join(pdf_dir, "_tmp")
     ensure_dir(temp_dir)
 
+    # for column in [
+    #     "downloaded",
+    #     "downloaded_path",
+    #     "download_attempted_at",
+    #     "download_source",
+    #     "download_error",
+    # ]:
+    #     if column not in dataframe.columns:
+    #         dataframe[column] = None
+
     for column in [
         "downloaded",
         "downloaded_path",
@@ -641,6 +719,7 @@ def download_articles(
     ]:
         if column not in dataframe.columns:
             dataframe[column] = None
+        dataframe[column] = dataframe[column].astype(object)
 
     dataframe["downloaded"] = dataframe["downloaded"].apply(
         lambda value: True
@@ -663,6 +742,7 @@ def download_articles(
         openalex_mailto=openalex_mailto,
         openalex_api_key=openalex_api_key,
         temp_dir=temp_dir,
+        logger = logger,
     )
 
     processed = 0
@@ -699,31 +779,42 @@ def download_articles(
         submit_next(executor, todo_iter, in_flight)
 
         while in_flight:
-            for future in as_completed(list(in_flight.keys()), timeout=None):
-                idx = in_flight.pop(future)
-                try:
-                    record = future.result()
-                    for key, value in record.items():
-                        if key in dataframe.columns:
-                            dataframe.at[idx, key] = value
-                    if record.get("downloaded") is True:
-                        success_count += 1
-                except Exception as exc:
-                    dataframe.at[idx, "downloaded"] = False
-                    dataframe.at[idx, "download_error"] = f"Processing error: {exc}"
+            # for future in as_completed(list(in_flight.keys()), timeout=None):
 
-                processed += 1
-                if processed % save_interval == 0:
-                    write_progress(dataframe, progress_path)
-                    emit_log(
-                        logger,
-                        "info",
-                        f"[{utc_now_iso()}] Progress: [{processed}/{len(todo)}] (success: {success_count})",
-                    )
+            try:
+                completed_iter = as_completed(list(in_flight.keys()), timeout=60)
+                for future in completed_iter:
+                    idx = in_flight.pop(future)
+                    try:
+                        record = future.result()
+                        for key, value in record.items():
+                            if key in dataframe.columns:
+                                dataframe.at[idx, key] = value
+                        if record.get("downloaded") is True:
+                            success_count += 1
+                    except Exception as exc:
+                        dataframe.at[idx, "downloaded"] = False
+                        dataframe.at[idx, "download_error"] = f"Processing error: {exc}"
 
-                submit_next(executor, todo_iter, in_flight)
-                if not in_flight:
-                    break
+                    processed += 1
+                    if processed % save_interval == 0:
+                        write_progress(dataframe, progress_path)
+                        emit_log(
+                            logger,
+                            "info",
+                            f"[{utc_now_iso()}] Progress: [{processed}/{len(todo)}] (success: {success_count})",
+                        )
+
+                    submit_next(executor, todo_iter, in_flight)
+                    if not in_flight:
+                        break
+            except FuturesTimeoutError:
+                emit_log(
+                    logger, "warning",
+                    f"[{utc_now_iso()}] Heartbeat: {len(in_flight)} futures still in-flight "
+                    f"(processed so far: {processed}/{len(todo)}, success: {success_count})"
+                )
+                continue
 
     write_progress(dataframe, progress_path)
     return dataframe

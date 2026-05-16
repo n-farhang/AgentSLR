@@ -268,4 +268,15 @@ def ensure_harvest_columns(
 
 
 def write_progress(dataframe: pd.DataFrame, output_path: str | Path) -> None:
-    dataframe.to_csv(output_path, index=False)
+    file_exists = os.path.exists(output_path) and os.path.getsize(output_path) > 0
+    with open(output_path, "a") as f:
+        dataframe.to_csv(f, index=False, header=not file_exists)
+
+
+# def write_progress(dataframe: pd.DataFrame, output_path: str | Path) -> None:
+#     with open(output_path, "w") as f:
+#         dataframe.to_csv(f, index=False)
+# dataframe.to_csv(output_path, index=False)
+
+
+
